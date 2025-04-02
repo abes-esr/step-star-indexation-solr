@@ -29,8 +29,9 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.28</version>
         </dependency>
+
 
         <dependency>
             <groupId>net.sf.saxon</groupId>
