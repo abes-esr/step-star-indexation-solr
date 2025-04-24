@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "DOCUMENT", schema = "STAR")

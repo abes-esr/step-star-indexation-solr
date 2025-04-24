@@ -3,8 +3,9 @@ package fr.abes.indexationsolr;
 
 import fr.abes.indexationsolr.chunk.DocumentIndexationSolrProcessor;
 import fr.abes.indexationsolr.chunk.DocumentIndexationSolrReader;
+import fr.abes.indexationsolr.chunk.DocumentIndexationSolrTasklet;
 import fr.abes.indexationsolr.chunk.DocumentIndexationSolrWriter;
-import fr.abes.indexationsolr.entities.IDocument;
+import fr.abes.indexationsolr.entities.DocumentIndexationSolr;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -37,10 +38,10 @@ public class BatchConfiguration {
 
     // ---------- JOB ---------------------------------------------
 
-    public BatchConfiguration(JobBuilderFactory jobs, StepBuilderFactory stepBuilderFactory, @Qualifier("dataSourceOracle") DataSource dataSourceOracle) {
+    public BatchConfiguration(JobBuilderFactory jobs, StepBuilderFactory stepBuilderFactory, @Qualifier("dataSource") DataSource dataSource) {
         this.jobs = jobs;
         this.stepBuilderFactory = stepBuilderFactory;
-        this.dataSource = dataSourceOracle;
+        this.dataSource = dataSource;
     }
 
     @Bean
@@ -69,14 +70,14 @@ public class BatchConfiguration {
     public Step executerTasklet() {
         return stepBuilderFactory
                 .get("executerTasklet").allowStartIfComplete(true)
-                .tasklet(uneTasklet())
+                .tasklet(documentIndexationSolrTasklet())
                 .build();
     }
 
     @Bean
-    protected Step stepProcessLines(ItemReader<IDocument> reader, ItemProcessor<IDocument, IDocument> processor, ItemWriter<IDocument> writer) {
+    protected Step stepProcessLines(ItemReader<DocumentIndexationSolr> reader, ItemProcessor<DocumentIndexationSolr, DocumentIndexationSolr> processor, ItemWriter<DocumentIndexationSolr> writer) {
         return stepBuilderFactory
-                .get("stepProcessLines").<IDocument, IDocument> chunk(1)
+                .get("stepProcessLines").<DocumentIndexationSolr, DocumentIndexationSolr> chunk(1)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
@@ -87,26 +88,26 @@ public class BatchConfiguration {
 
     // ------------- TASKLETS -----------------------
     @Bean
-    public Tasklet uneTasklet()
+    public DocumentIndexationSolrTasklet documentIndexationSolrTasklet()
     {
-        return new UneTasklet();
+        return new DocumentIndexationSolrTasklet();
     }
 
 
     // ----------------- CHUNKS ------------------------------
 
     @Bean
-    public ItemReader<IDocument> itemReader() {
+    public ItemReader<DocumentIndexationSolr> itemReader() {
         return new DocumentIndexationSolrReader();
     }
 
     @Bean
-    public ItemProcessor<IDocument, IDocument> itemProcessor() {
+    public ItemProcessor<DocumentIndexationSolr, DocumentIndexationSolr> itemProcessor() {
         return new DocumentIndexationSolrProcessor();
     }
 
     @Bean
-    public ItemWriter<IDocument> itemWriter() {
+    public ItemWriter<DocumentIndexationSolr> itemWriter() {
         return new DocumentIndexationSolrWriter();
     }
 }

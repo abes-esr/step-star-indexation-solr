@@ -15,5 +15,6 @@ public class DaoProvider {
     @Resource
     private IDocumentStarDao documentStar;
 
-
+    @Resource
+    private  IDocumentIndexationSolrDao documentIndexationSolr;
 }
