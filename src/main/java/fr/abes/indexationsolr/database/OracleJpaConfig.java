@@ -18,7 +18,7 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "fr.abes.indexationsolr.dao", // ou ton package DAO
+        basePackages = "fr.abes.indexationsolr.dao",
         entityManagerFactoryRef = "oracleEntityManagerFactory",
         transactionManagerRef = "oracleTransactionManager"
 )
@@ -40,7 +40,7 @@ public class OracleJpaConfig {
     ) {
         return builder
                 .dataSource(oracleDataSource)
-                .packages("fr.abes.indexationsolr.entities") // tes entités
+                .packages("fr.abes.indexationsolr.entities")
                 .build();
     }
 

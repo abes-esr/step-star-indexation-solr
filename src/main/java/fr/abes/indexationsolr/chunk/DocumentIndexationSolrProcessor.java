@@ -13,8 +13,13 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
 
 @Slf4j
+@Component
 public class DocumentIndexationSolrProcessor implements ItemProcessor<DocumentIndexationSolr, DocumentIndexationSolr>, StepExecutionListener {
 
     @Autowired
@@ -27,21 +32,15 @@ public class DocumentIndexationSolrProcessor implements ItemProcessor<DocumentIn
 
     @Override
     public DocumentIndexationSolr process(DocumentIndexationSolr documentIndexationSolr) {
-        log.info("Indexation n° " + documentIndexationSolr.getId());
-        IDocument document = service.getDocument(documentIndexationSolr);
-        DocumentIndexationSolrAction action = documentIndexationSolr.getAction();
-        if (action == DocumentIndexationSolrAction.add) {
-            service.indexOnSolr(document);
-        }
-        else if (action == DocumentIndexationSolrAction.remove){
-            service.removeOnSolr(document);
+        log.info("Indexation n° " + documentIndexationSolr.getId() + " en cours.");
+        Boolean isIndexed = service.handle(documentIndexationSolr);
+        if (isIndexed) {
+            return documentIndexationSolr;
         }
         else {
-            throw new IllegalArgumentException("Action " + action + " not supported");
+            log.error("Indexation n° " + documentIndexationSolr.getId() + " n'a pas aboutie.");
+            return null;
         }
-
-
-        return documentIndexationSolr;
     }
 
     @Override
