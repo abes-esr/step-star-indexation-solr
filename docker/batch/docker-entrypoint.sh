@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export DOCUMENT_INDEXATION_SOLR_CRON=${DOCUMENT_INDEXATION_SOLR_CRON:='* * * * *'}
+export $DOCUMENT_INDEXATION_SOLR_AT_STARTUP=${$DOCUMENT_INDEXATION_SOLR_AT_STARTUP:='1'}
 
 # Réglage de /etc/environment pour que les crontab s'exécutent avec les bonnes variables d'env
 echo "$(env)
