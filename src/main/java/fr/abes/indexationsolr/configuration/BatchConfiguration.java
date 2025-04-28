@@ -35,11 +35,10 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Job jobTraitement() {
-        log.info("debut du job : jobTraitement...");
-
+    public Job documentIndexationSolr() {
+        log.info("début du job documentIndexationSolr");
         return jobs
-                .get("chunksJob")
+                .get("documentIndexationSolr")
                 .start(executerTasklet())
                 .incrementer(new RunIdIncrementer())
                 .build();
