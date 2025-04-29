@@ -1,5 +1,6 @@
 package fr.abes.indexationsolr.database;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 
 @Configuration
 @EnableTransactionManagement
+@Slf4j
 @EnableJpaRepositories(
         basePackages = "fr.abes.indexationsolr.dao",
         entityManagerFactoryRef = "oracleEntityManagerFactory",
@@ -38,6 +40,7 @@ public class OracleJpaConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("dataSourceOracle") DataSource oracleDataSource
     ) {
+        log.info("oracleEntityManagerFactory");
         return builder
                 .dataSource(oracleDataSource)
                 .packages("fr.abes.indexationsolr.entities")

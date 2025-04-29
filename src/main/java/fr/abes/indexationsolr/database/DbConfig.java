@@ -2,6 +2,8 @@
 package fr.abes.indexationsolr.database;
 
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.pool.OracleDataSource;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
+@Slf4j
 public class DbConfig {
 
     @Bean
@@ -25,6 +28,7 @@ public class DbConfig {
     @Bean
     @ConfigurationProperties("spring.db.datasource")
     public DataSource dataSourceOracle() throws SQLException {
+        log.info("DataSource Oracle URL: " + dataSourceProperties().getUrl());
         return DataSourceBuilder.create().url(dataSourceProperties().getUrl())
                 .username(dataSourceProperties().getUsername()).password(dataSourceProperties().getPassword())
                 .type(OracleDataSource.class).build();
