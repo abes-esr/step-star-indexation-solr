@@ -36,10 +36,10 @@ public class DocumentIndexationSolrService {
         DocumentIndexationSolrOrigin origin = documentIndexationSolr.getOrigin();
         IDocumentDao documentDao;
         if (origin == DocumentIndexationSolrOrigin.star) {
-            documentDao = dao.getDocumentStar();
+            documentDao = dao.getDocumentStarDao();
         }
         else if (origin == DocumentIndexationSolrOrigin.sujets) {
-            documentDao = dao.getDocumentSujets();
+            documentDao = dao.getDocumentSujetsDao();
         } else {
             throw new IllegalArgumentException("Unsupported origin: " + origin);
         }

@@ -10,11 +10,11 @@ import javax.annotation.Resource;
 public class DaoProvider {
 
     @Resource
-    private IDocumentSujetsDao documentSujets;
+    private IDocumentSujetsDao documentSujetsDao;
 
     @Resource
-    private IDocumentStarDao documentStar;
+    private IDocumentStarDao documentStarDao;
 
     @Resource
-    private  IDocumentIndexationSolrDao documentIndexationSolr;
+    private IDocumentIndexationSolrDao documentIndexationSolrDao;
 }

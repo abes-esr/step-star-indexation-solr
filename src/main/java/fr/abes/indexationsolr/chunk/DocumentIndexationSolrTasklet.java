@@ -34,7 +34,7 @@ public class DocumentIndexationSolrTasklet implements Tasklet, StepExecutionList
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) {
         log.info("Dans la Tasklet DocumentIndexationSolrTasklet");
         try {
-            List<DocumentIndexationSolr> documentIndexationSolrs = dao.getDocumentIndexationSolr().findAll(Sort.by(Sort.Order.asc("id")));
+            List<DocumentIndexationSolr> documentIndexationSolrs = dao.getDocumentIndexationSolrDao().findAll(Sort.by(Sort.Order.asc("id")));
             documentIndexationSolrs.forEach(documentIndexationSolr -> {
                 try {
                     log.info("Indexation n°" + documentIndexationSolr.getId() + " en cours.");
@@ -44,7 +44,7 @@ public class DocumentIndexationSolrTasklet implements Tasklet, StepExecutionList
                     Boolean isIndexed = service.handle(documentIndexationSolr);
                     if (isIndexed) {
                         log.info("Indexation n°" + documentIndexationSolr.getId() + " a aboutie.");
-                        dao.getDocumentIndexationSolr().delete(documentIndexationSolr);
+                        dao.getDocumentIndexationSolrDao().delete(documentIndexationSolr);
                         log.info("Indexation n°" + documentIndexationSolr.getId() + " supprimée de la table DOCUMENT_INDEXATION_SOLR.");
                     }
                     else {
