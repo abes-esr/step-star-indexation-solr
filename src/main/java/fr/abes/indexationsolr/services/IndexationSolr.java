@@ -243,9 +243,10 @@ public class IndexationSolr {
         } catch (IOException e) {
             try {
                 assert urlc != null;
-                logger.info("Solr returned an error: " + urlc.getResponseMessage());
+                String errorTitle = getErrorHttpUrlConnection(urlc);
+                logger.info("Solr returned an error: " + errorTitle);
                 throw new IOException("Erreur lors du post sur solr : "
-                        + urlc.getResponseMessage(), e);
+                        + errorTitle, e);
             } catch (IOException f) {
                 logger.info("Connection error (is Solr running at " + solrUrl + " ?): " + e);
                 throw new IOException("Erreur de connexion à solr", e);
@@ -255,6 +256,21 @@ public class IndexationSolr {
                 urlc.disconnect();
             }
         }
+    }
+
+    private String getErrorHttpUrlConnection(HttpURLConnection urlc) throws IOException {
+        BufferedReader reader;
+        reader = new BufferedReader(new InputStreamReader(urlc.getErrorStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            response.append(line).append(System.lineSeparator());
+        }
+        return response.toString().substring(
+                response.indexOf("<body><h1>")+10,
+                response.indexOf("\n")
+        );
     }
 
     /**
