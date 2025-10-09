@@ -453,6 +453,12 @@
                     <xsl:value-of select="/mets:mets/mets:amdSec/mets:techMD/mets:mdWrap/mets:xmlData/tef:thesisAdmin/dc:identifier[@xsi:type='tef:NNT']"/>
                 </field>
 
+                <!-- doi -->
+
+                <field name="doi">
+                    <xsl:value-of select="/mets:mets/mets:amdSec/mets:techMD/mets:mdWrap/mets:xmlData/tef:thesisAdmin/dc:identifier[@xsi:type='tef:DOI']"/>
+                </field>
+
     	    <!-- these sur trvx -->
     	    <field name="theseSurTravaux">
                     <xsl:value-of select="/mets:mets/mets:amdSec[1]/mets:techMD[1]/mets:mdWrap[1]/mets:xmlData[1]/tef:thesisAdmin[1]/tef:theseSurTravaux[1]"/>
