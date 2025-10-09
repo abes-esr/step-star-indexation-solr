@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class IndexationsolrApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IndexationsolrApplication.class, args);
+        System.exit(SpringApplication.exit(SpringApplication.run(IndexationsolrApplication.class, args)));
     }
 
 }
