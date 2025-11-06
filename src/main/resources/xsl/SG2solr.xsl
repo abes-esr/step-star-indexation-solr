@@ -138,6 +138,18 @@
         <field name="SGtailleCines">
             <xsl:value-of select="format-number(sum(//tef:taille), '0')"/>
         </field>
+        <field name="SGdateDoi">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::dateDoi"/>
+        </field>
+        <field name="SGindicDoi">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::indicDoi"/>
+        </field>
+        <field name="SGmajDoi">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::majDoi"/>
+        </field>
+        <field name="SGtraceDoi">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::trace"/>
+        </field>
         <xsl:for-each select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/sudoc/RCR">
             <field name="SGRCRSudoc">
                 <xsl:value-of select="attribute::code"/>
