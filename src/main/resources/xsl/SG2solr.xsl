@@ -139,16 +139,16 @@
             <xsl:value-of select="format-number(sum(//tef:taille), '0')"/>
         </field>
         <field name="SGdateDoi">
-            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::dateDoi"/>
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::dateCrossref"/>
         </field>
         <field name="SGindicDoi">
-            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::indicDoi"/>
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::indicCrossref"/>
         </field>
         <field name="SGmajDoi">
-            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::majDoi"/>
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::majCrossref"/>
         </field>
         <field name="SGtraceDoi">
-            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/doi/attribute::trace"/>
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::trace"/>
         </field>
         <xsl:for-each select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/sudoc/RCR">
             <field name="SGRCRSudoc">
