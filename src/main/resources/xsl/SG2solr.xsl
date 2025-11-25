@@ -135,6 +135,9 @@
 		<field name="SGtraceCines">
             <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/cines/attribute::trace"/>
         </field>
+        <field name="SGtailleCines">
+            <xsl:value-of select="format-number(sum(//tef:taille), '0')"/>
+        </field>
         <field name="SGdateCrossref">
             <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::dateCrossref"/>
         </field>
