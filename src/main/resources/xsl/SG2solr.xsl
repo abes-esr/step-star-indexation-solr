@@ -135,6 +135,9 @@
 		<field name="SGtraceCines">
             <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/cines/attribute::trace"/>
         </field>
+        <field name="SGtailleCines">
+            <xsl:value-of select="format-number(sum(//tef:taille), '0')"/>
+        </field>
         <xsl:for-each select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/sudoc/RCR">
             <field name="SGRCRSudoc">
                 <xsl:value-of select="attribute::code"/>
