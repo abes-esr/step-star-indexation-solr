@@ -135,6 +135,21 @@
 		<field name="SGtraceCines">
             <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/cines/attribute::trace"/>
         </field>
+        <field name="SGtailleCines">
+            <xsl:value-of select="format-number(sum(//tef:taille), '0')"/>
+        </field>
+        <field name="SGdateCrossref">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::dateCrossref"/>
+        </field>
+        <field name="SGindicCrossref">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::indicCrossref"/>
+        </field>
+        <field name="SGmajCrossref">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::majCrossref"/>
+        </field>
+        <field name="SGtraceCrossref">
+            <xsl:value-of select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/crossref/attribute::trace"/>
+        </field>
         <xsl:for-each select="/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/star_gestion/traitements/sorties/sudoc/RCR">
             <field name="SGRCRSudoc">
                 <xsl:value-of select="attribute::code"/>
