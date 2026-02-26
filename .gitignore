@@ -31,3 +31,7 @@
 ##
 **/*.properties
 **/hibernate.cfg.xml
+
+docker-entrypoint.sh
+document-indexation-solr.sh
+document-indexation-solr.tmpl
