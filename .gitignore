@@ -32,6 +32,8 @@
 **/*.properties
 **/hibernate.cfg.xml
 
+### Dockerisation ###
 docker-entrypoint.sh
 document-indexation-solr.sh
 document-indexation-solr.tmpl
+.gitkeep
