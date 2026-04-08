@@ -44,18 +44,18 @@ public class DocumentIndexationSolrTasklet implements Tasklet, StepExecutionList
                     Boolean isIndexed = service.handle(documentIndexationSolr);
                     if (isIndexed) {
                         log.info("Indexation n°" + documentIndexationSolr.getId() + " a aboutie.");
-                        dao.getDocumentIndexationSolrDao().delete(documentIndexationSolr);
+                        if (dao.getDocumentIndexationSolrDao().existsById(documentIndexationSolr.getId())) {
+                            dao.getDocumentIndexationSolrDao().deleteById(documentIndexationSolr.getId());
+                        }
                         log.info("Indexation n°" + documentIndexationSolr.getId() + " supprimée de la table DOCUMENT_INDEXATION_SOLR.");
-                    }
-                    else {
+                    } else {
                         log.error("Indexation n°" + documentIndexationSolr.getId() + " n'a pas aboutie.");
                     }
                 } catch (Exception e) {
                     log.error("Indexation n°" + documentIndexationSolr.getId() + " a subit une erreur: " + e.getMessage());
                 }
             });
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Tasklet DocumentIndexationSolrTasklet a subit une erreur: " + e.getMessage());
         }
         return RepeatStatus.FINISHED;
